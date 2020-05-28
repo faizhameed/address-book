@@ -1,8 +1,8 @@
 import { actionTypes } from "./types";
 import Axios from "axios";
 
-export const fetchContactList = (data) => {
-  let url = `https://randomuser.me/api/?results=50`;
+export const fetchContactList = (page = 1) => {
+  let url = `https://randomuser.me/api/?${page}&results=50&inc=id,name,gender,dob,email,phone`;
 
   return function (dispatch) {
     dispatch({
@@ -23,3 +23,8 @@ export const fetchContactList = (data) => {
       );
   };
 };
+
+export const updatePageNumber = (page) => ({
+  type: actionTypes.UPDATE_PAGE_NUMBER,
+  payload: page,
+});

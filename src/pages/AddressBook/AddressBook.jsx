@@ -4,10 +4,10 @@ import { fetchContactList } from "../../redux/actions";
 import Spinner from "../../components/spinner/spinner.component";
 const ContactTable = lazy(() => import("../../components/table/contactTable"));
 
-const AddressBook = ({ fetchContactList }) => {
+const AddressBook = ({ fetchContactList, pageNumber }) => {
   useEffect(() => {
-    fetchContactList();
-  }, [fetchContactList]);
+    fetchContactList(pageNumber);
+  }, [fetchContactList, pageNumber]);
   return (
     <div>
       <h2>Address Book</h2>
@@ -18,8 +18,12 @@ const AddressBook = ({ fetchContactList }) => {
   );
 };
 
+const mapStateToProps = ({ contactListReducer: { page } }) => ({
+  pageNumber: page,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   fetchContactList: () => dispatch(fetchContactList()),
 });
 
-export default connect(null, mapDispatchToProps)(AddressBook);
+export default connect(mapStateToProps, mapDispatchToProps)(AddressBook);

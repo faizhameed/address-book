@@ -1,98 +1,94 @@
-import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
+import React, { useRef, useCallback } from "react";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner.component";
+import "./contactTable.scss";
+import { updatePageNumber } from "../../redux/actions";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
+const ContactTable = ({ isPending, contactList, page, updatePageNumber }) => {
+  const observer = useRef();
+  const lastElementRef = useCallback(
+    (node) => {
+      if (isPending) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          updatePageNumber(page + 1);
+          console.log(entries[0]);
+        }
+      });
+      if (node) {
+        console.log(node);
+        observer.current.observe(node);
+      }
     },
-  },
-}))(TableRow);
-
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
-
-const ContactTable = ({ isPending, contactList }) => {
-  const classes = useStyles();
+    [isPending, page, updatePageNumber]
+  );
 
   return (
-    <TableContainer component={Paper}>
-      {!isPending && contactList !== null ? (
-        <Table className={classes.table} aria-label="customized table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell>SI.No</StyledTableCell>
-              <StyledTableCell>Name</StyledTableCell>
-              <StyledTableCell align="right">Gender</StyledTableCell>
-              <StyledTableCell align="right">Age</StyledTableCell>
-              <StyledTableCell align="right">Email</StyledTableCell>
-              <StyledTableCell align="right">Contact</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {contactList.results.map((person, index) => (
-              <StyledTableRow key={person.id.value}>
-                <StyledTableCell component="th" scope="row">
-                  {index + 1}
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
-                  {person.name.first + " " + person.name.last}
-                </StyledTableCell>
-                <StyledTableCell align="right">{person.gender}</StyledTableCell>
-                <StyledTableCell align="right">
-                  {person.dob.age}
-                </StyledTableCell>
-                <StyledTableCell align="right">{person.email}</StyledTableCell>
-                <StyledTableCell align="right">{person.phone}</StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      ) : (
-        <Spinner />
-      )}
-    </TableContainer>
+    <div>
+      {contactList.length > 0 ? (
+        <table>
+          <thead>
+            <tr>
+              <th>SI.No</th>
+              <th>Name</th>
+              <th>Gender</th>
+              <th>Age</th>
+              <th>Email</th>
+              <th>Contact</th>
+            </tr>
+          </thead>
+          <tbody>
+            {contactList.map((person, index) => {
+              if (contactList.length === index + 1) {
+                return (
+                  <tr ref={lastElementRef} key={index}>
+                    <td data-label="SI.No" component="th" scope="row">
+                      {index + 1}
+                    </td>
+                    <td data-label="Name" component="th" scope="row">
+                      {person.name.first + " " + person.name.last}
+                    </td>
+                    <td data-label="Gender">{person.gender}</td>
+                    <td data-label="DOB">{person.dob.age}</td>
+                    <td data-label="Email">{person.email}</td>
+                    <td data-label="Phone">{person.phone}</td>
+                  </tr>
+                );
+              } else {
+                return (
+                  <tr key={person.name.first + " " + person.name.last}>
+                    <td data-label="SI.No" component="th" scope="row">
+                      {index + 1}
+                    </td>
+                    <td data-label="Name" component="th" scope="row">
+                      {person.name.first + " " + person.name.last}
+                    </td>
+                    <td data-label="Gender">{person.gender}</td>
+                    <td data-label="DOB">{person.dob.age}</td>
+                    <td data-label="Email">{person.email}</td>
+                    <td data-label="Phone">{person.phone}</td>
+                  </tr>
+                );
+              }
+            })}
+          </tbody>
+        </table>
+      ) : null}
+      {isPending && page < 11 ? <Spinner /> : null}
+    </div>
   );
 };
 const mapStateToProps = ({
-  contactListReducer: { isPending, contactList },
+  contactListReducer: { isPending, contactList, page },
 }) => ({
   isPending,
   contactList,
+  page,
 });
 
-export default connect(mapStateToProps)(ContactTable);
+const mapDispatchToProps = (dispatch) => ({
+  updatePageNumber: (page) => dispatch(updatePageNumber(page)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ContactTable);

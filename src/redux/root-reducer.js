@@ -2,16 +2,17 @@ import { combineReducers } from "redux";
 import { actionTypes } from "./types";
 
 const initialStateContactList = {
-  contactList: null,
+  contactList: [],
   error: null,
   isPending: false,
+  page: 1,
 };
 function contactListReducer(state = initialStateContactList, action) {
   switch (action.type) {
     case actionTypes.GET_CONTACTS_SUCCESS:
       return {
         ...state,
-        contactList: action.payload,
+        contactList: [...state.contactList, ...action.payload.results],
         isPending: false,
       };
 
@@ -26,6 +27,16 @@ function contactListReducer(state = initialStateContactList, action) {
         isPending: false,
         error: action.payload,
       };
+
+    case actionTypes.UPDATE_PAGE_NUMBER:
+      if (action.payload < 11) {
+        return {
+          ...state,
+          page: action.payload,
+        };
+      } else {
+        return state;
+      }
     default:
       break;
   }
