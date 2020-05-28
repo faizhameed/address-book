@@ -2,7 +2,7 @@ import { actionTypes } from "./types";
 import Axios from "axios";
 
 export const fetchContactList = (page = 1) => {
-  let url = `https://randomuser.me/api/?${page}&results=50&inc=id,name,gender,dob,email,phone`;
+  let url = `https://randomuser.me/api/?${page}&results=50`;
 
   return function (dispatch) {
     dispatch({
@@ -27,4 +27,9 @@ export const fetchContactList = (page = 1) => {
 export const updatePageNumber = (page) => ({
   type: actionTypes.UPDATE_PAGE_NUMBER,
   payload: page,
+});
+
+export const updatePersonDetailView = (person) => ({
+  type: actionTypes.UPDATE_PERSON_DETAIL,
+  payload: person,
 });

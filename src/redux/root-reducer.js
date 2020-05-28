@@ -1,13 +1,13 @@
 import { combineReducers } from "redux";
 import { actionTypes } from "./types";
 
-const initialStateContactList = {
+const initialContactList = {
   contactList: [],
   error: null,
   isPending: false,
   page: 1,
 };
-function contactListReducer(state = initialStateContactList, action) {
+function contactListReducer(state = initialContactList, action) {
   switch (action.type) {
     case actionTypes.GET_CONTACTS_SUCCESS:
       return {
@@ -43,8 +43,24 @@ function contactListReducer(state = initialStateContactList, action) {
   return state;
 }
 
+const initialPersonDetail = {
+  person: null,
+};
+
+function personDetailReducer(state = initialPersonDetail, action) {
+  switch (action.type) {
+    case actionTypes.UPDATE_PERSON_DETAIL:
+      return { ...state, person: action.payload };
+
+    default:
+      break;
+  }
+  return state;
+}
+
 const rootReducer = combineReducers({
   contactListReducer,
+  personDetailReducer,
 });
 
 export default rootReducer;
