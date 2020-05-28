@@ -1,25 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { lazy, Suspense } from "react";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import "./App.css";
+import ErrorBoundary from "./components/error-boundary/error-boundary.component";
+import Spinner from "./components/spinner/spinner.component";
+const ContactDetails = lazy(() =>
+  import("./pages/ContactDetails/ContactDetails")
+);
+const AddressBook = lazy(() => import("./pages/AddressBook/AddressBook"));
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Switch>
+          <ErrorBoundary>
+            <Suspense fallback={<Spinner />}>
+              <Route exact path="/" component={AddressBook} />
+              <Route path="/contact-details" component={ContactDetails} />
+            </Suspense>
+          </ErrorBoundary>
+        </Switch>
+      </div>
+    </Router>
   );
 }
 

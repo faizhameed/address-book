@@ -1,23 +1,39 @@
-import { combineReducers } from  "redux";
-import { actionTypes } from  "./types";
-const  initialState  = {
-books: [],
+import { combineReducers } from "redux";
+import { actionTypes } from "./types";
+
+const initialStateContactList = {
+  contactList: null,
+  error: null,
+  isPending: false,
 };
-function  bookReducer(state  =  initialState, action) {
-switch (action.type) {
-case  actionTypes.ADD_BOOK:
-return {
-	...state,
-	books: [...state.books,  action.payload],
-};
-default:
-	break;
-}
-	return  state;
+function contactListReducer(state = initialStateContactList, action) {
+  switch (action.type) {
+    case actionTypes.GET_CONTACTS_SUCCESS:
+      return {
+        ...state,
+        contactList: action.payload,
+        isPending: false,
+      };
+
+    case actionTypes.GET_CONTACTS_PENDING:
+      return {
+        ...state,
+        isPending: true,
+      };
+    case actionTypes.GET_CONTACTS_FAILED:
+      return {
+        ...state,
+        isPending: false,
+        error: action.payload,
+      };
+    default:
+      break;
+  }
+  return state;
 }
 
-const  rootReducer  =  combineReducers({
-	bookReducer,
+const rootReducer = combineReducers({
+  contactListReducer,
 });
 
-export  default  rootReducer;
+export default rootReducer;
