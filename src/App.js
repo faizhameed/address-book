@@ -16,7 +16,7 @@ function App() {
           <ErrorBoundary>
             <Suspense fallback={<Spinner />}>
               <Route exact path="/" component={AddressBook} />
-              <Route path="/contact-details" component={ContactDetails} />
+              <Route path="/contact-detail" component={ContactDetails} />
             </Suspense>
           </ErrorBoundary>
         </Switch>

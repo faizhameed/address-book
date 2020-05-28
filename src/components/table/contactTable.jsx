@@ -1,10 +1,26 @@
-import React, { useRef, useCallback } from "react";
+import React, { useEffect, useRef, useCallback } from "react";
+import { useLocation, useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner.component";
 import "./contactTable.scss";
-import { updatePageNumber } from "../../redux/actions";
+import { updatePageNumber, updatePersonDetailView } from "../../redux/actions";
 
-const ContactTable = ({ isPending, contactList, page, updatePageNumber }) => {
+const ContactTable = ({
+  isPending,
+  contactList,
+  page,
+  updatePageNumber,
+  updatePersonDetailView,
+}) => {
+  let location = useLocation();
+  let history = useHistory();
+  useEffect(() => {}, []);
+
+  const handleDetailView = (person) => {
+    updatePersonDetailView(person);
+    history.push("contact-detail");
+  };
+
   const observer = useRef();
   const lastElementRef = useCallback(
     (node) => {
@@ -46,7 +62,12 @@ const ContactTable = ({ isPending, contactList, page, updatePageNumber }) => {
                     <td data-label="SI.No" component="th" scope="row">
                       {index + 1}
                     </td>
-                    <td data-label="Name" component="th" scope="row">
+                    <td
+                      onClick={() => handleDetailView(person)}
+                      data-label="Name"
+                      component="th"
+                      scope="row"
+                    >
                       {person.name.first + " " + person.name.last}
                     </td>
                     <td data-label="Gender">{person.gender}</td>
@@ -61,7 +82,12 @@ const ContactTable = ({ isPending, contactList, page, updatePageNumber }) => {
                     <td data-label="SI.No" component="th" scope="row">
                       {index + 1}
                     </td>
-                    <td data-label="Name" component="th" scope="row">
+                    <td
+                      onClick={() => handleDetailView(person)}
+                      data-label="Name"
+                      component="th"
+                      scope="row"
+                    >
                       {person.name.first + " " + person.name.last}
                     </td>
                     <td data-label="Gender">{person.gender}</td>
@@ -89,6 +115,7 @@ const mapStateToProps = ({
 
 const mapDispatchToProps = (dispatch) => ({
   updatePageNumber: (page) => dispatch(updatePageNumber(page)),
+  updatePersonDetailView: (person) => dispatch(updatePersonDetailView(person)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactTable);
