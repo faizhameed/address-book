@@ -2,6 +2,8 @@ import React, { useEffect, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { fetchContactList } from "../../redux/actions";
 import Spinner from "../../components/spinner/spinner.component";
+import Header from "../../components/Header/Header";
+
 const ContactTable = lazy(() => import("../../components/table/contactTable"));
 
 const AddressBook = ({ fetchContactList, pageNumber }) => {
@@ -9,12 +11,15 @@ const AddressBook = ({ fetchContactList, pageNumber }) => {
     fetchContactList(pageNumber);
   }, [fetchContactList, pageNumber]);
   return (
-    <div>
-      <h2>Address Book</h2>
-      <Suspense fallback={<Spinner />}>
-        <ContactTable />
-      </Suspense>
-    </div>
+    <React.Fragment>
+      <Header content={`Address Book`} />
+      <div className="main">
+        <Suspense fallback={<Spinner />}>
+          <h3>Click on name to view details</h3>
+          <ContactTable />
+        </Suspense>
+      </div>
+    </React.Fragment>
   );
 };
 

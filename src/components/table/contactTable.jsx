@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../spinner/spinner.component";
 import "./contactTable.scss";
 import { updatePageNumber, updatePersonDetailView } from "../../redux/actions";
+import { Icon } from "semantic-ui-react";
 
 const ContactTable = ({
   isPending,
@@ -39,65 +40,67 @@ const ContactTable = ({
   );
 
   return (
-    <div>
+    <div className="container-table">
       {contactList.length > 0 ? (
-        <table>
-          <thead>
-            <tr>
-              <th>SI.No</th>
-              <th>Name</th>
-              <th>Gender</th>
-              <th>Age</th>
-              <th>Email</th>
-              <th>Contact</th>
-            </tr>
-          </thead>
-          <tbody>
-            {contactList.map((person, index) => {
-              if (contactList.length === index + 1) {
-                return (
-                  <tr ref={lastElementRef} key={index}>
-                    <td data-label="SI.No" component="th" scope="row">
-                      {index + 1}
-                    </td>
-                    <td
-                      onClick={() => handleDetailView(person)}
-                      data-label="Name"
-                      component="th"
-                      scope="row"
-                    >
-                      {person.name.first + " " + person.name.last}
-                    </td>
-                    <td data-label="Gender">{person.gender}</td>
-                    <td data-label="DOB">{person.dob.age}</td>
-                    <td data-label="Email">{person.email}</td>
-                    <td data-label="Phone">{person.phone}</td>
-                  </tr>
-                );
-              } else {
-                return (
-                  <tr key={index}>
-                    <td data-label="SI.No" component="th" scope="row">
-                      {index + 1}
-                    </td>
-                    <td
-                      onClick={() => handleDetailView(person)}
-                      data-label="Name"
-                      component="th"
-                      scope="row"
-                    >
-                      {person.name.first + " " + person.name.last}
-                    </td>
-                    <td data-label="Gender">{person.gender}</td>
-                    <td data-label="DOB">{person.dob.age}</td>
-                    <td data-label="Email">{person.email}</td>
-                    <td data-label="Phone">{person.phone}</td>
-                  </tr>
-                );
-              }
-            })}
-          </tbody>
-        </table>
+        <ul className="responsive-table">
+          <li className="table-header">
+            <div className="col col-1">Name</div>
+            <div className="col col-2">Gender</div>
+            <div className="col col-3">Email</div>
+            <div className="col col-4">Contact</div>
+          </li>
+
+          {contactList.map((person, index) => {
+            if (contactList.length === index + 1) {
+              return (
+                <li className="table-row" ref={lastElementRef} key={index}>
+                  <div
+                    onClick={() => handleDetailView(person)}
+                    data-label="Name"
+                    component="th"
+                    scope="row"
+                    className="clickable col col-1"
+                  >
+                    {person.name.first + " " + person.name.last}
+                  </div>
+                  <div className="col col-2" data-label="Gender">
+                    {person.gender}
+                  </div>
+                  <div className="col col-3" data-label="Email">
+                    {person.email}
+                  </div>
+                  <div className="col col-4" data-label="Phone">
+                    {person.phone}
+                  </div>
+                </li>
+              );
+            } else {
+              return (
+                <li className="table-row" key={index}>
+                  <div
+                    onClick={() => handleDetailView(person)}
+                    data-label="Name"
+                    component="th"
+                    scope="row"
+                    className="clickable col col-1"
+                  >
+                    {person.name.first + " " + person.name.last + " "}
+                    <Icon name="eye" />
+                  </div>
+                  <div className="col col-2" data-label="Gender">
+                    {person.gender}
+                  </div>
+                  <div className="col col-3" data-label="Email">
+                    {person.email}
+                  </div>
+                  <div className="col col-4" data-label="Phone">
+                    {person.phone}
+                  </div>
+                </li>
+              );
+            }
+          })}
+        </ul>
       ) : null}
       {isPending && page < 11 ? <Spinner /> : null}
     </div>

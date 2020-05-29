@@ -1,85 +1,87 @@
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Roboto", sans-serif;
   line-height: 1.25;
 }
 
-table {
-  border: 1px solid #ccc;
-  border-collapse: collapse;
-  margin: 20px 0;
+.container-table {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.responsive-table {
+  margin: 0;
   padding: 0;
-  width: 100%;
-}
-
-table caption {
-  font-size: 1.5em;
-  margin: 0.5em 0 0.75em;
-}
-
-table tr {
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-  padding: 0.35em;
-}
-
-table th,
-table td {
-  padding: 0.625em;
-  text-align: center;
-}
-
-table th {
-  font-size: 0.85em;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-
-@media screen and (max-width: 600px) {
-  table {
-    border: 0;
-    table-layout: fixed;
+  li {
+    border-radius: 3px;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    text-align: left;
   }
-
-  table caption {
-    font-size: 1.3em;
-  }
-
-  table thead {
-    border: none;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-  }
-
-  table tr {
-    border-bottom: 3px solid #ddd;
-    display: block;
-    margin-bottom: 0.625em;
-  }
-
-  table td {
-    border-bottom: 1px solid #ddd;
-    display: block;
-    font-size: 0.8em;
-    text-align: right;
-  }
-
-  table td::before {
-    /*
-      * aria-label has no advantage, it won't be read inside a table
-      content: attr(aria-label);
-      */
-    content: attr(data-label);
-    float: left;
-    font-weight: bold;
+  .table-header {
+    background-color: #35333b;
+    color: #fcfcfc;
+    font-size: 1.5em;
     text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .table-row {
+    background-color: #ffffff;
+    font-size: 1.3em;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+  }
+  .col-1 {
+    flex-basis: 20%;
+  }
+  .col-2 {
+    flex-basis: 5%;
+  }
+  .col-3 {
+    flex-basis: 45%;
+  }
+  .col-4 {
+    flex-basis: 15%;
   }
 
-  table td:last-child {
-    border-bottom: 0;
+  @media all and (max-width: 767px) {
+    .table-header {
+      display: none;
+    }
+    .table-row {
+      font-size: calc(0.5em + 2vw);
+    }
+    li {
+      display: block;
+    }
+    .col {
+      flex-basis: 100%;
+    }
+    .col {
+      display: flex;
+      padding: 10px 0;
+      &:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 30%;
+        text-align: left;
+      }
+    }
+    @media all and (max-width: 480px) {
+      .table-row {
+        font-size: calc(0.1em + 2vw);
+      }
+    }
+  }
+}
+
+li .clickable {
+  cursor: pointer;
+  &:hover {
+    color: lightcoral;
   }
 }
