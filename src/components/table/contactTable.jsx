@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useCallback } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import React, { useRef, useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner.component";
 import "./contactTable.scss";
@@ -12,9 +12,7 @@ const ContactTable = ({
   updatePageNumber,
   updatePersonDetailView,
 }) => {
-  let location = useLocation();
   let history = useHistory();
-  useEffect(() => {}, []);
 
   const handleDetailView = (person) => {
     updatePersonDetailView(person);
@@ -78,7 +76,7 @@ const ContactTable = ({
                 );
               } else {
                 return (
-                  <tr key={person.name.first + " " + person.name.last}>
+                  <tr key={index}>
                     <td data-label="SI.No" component="th" scope="row">
                       {index + 1}
                     </td>

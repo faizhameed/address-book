@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
+import "semantic-ui-css/semantic.min.css";
 import ErrorBoundary from "./components/error-boundary/error-boundary.component";
 import Spinner from "./components/spinner/spinner.component";
 const ContactDetails = lazy(() =>
