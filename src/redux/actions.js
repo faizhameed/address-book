@@ -33,3 +33,7 @@ export const updatePersonDetailView = (person) => ({
   type: actionTypes.UPDATE_PERSON_DETAIL,
   payload: person,
 });
+
+export const toggleDarkMode = () => ({
+  type: actionTypes.TOGGLE_DARK_MODE,
+});
