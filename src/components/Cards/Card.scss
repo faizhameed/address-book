@@ -1,0 +1,23 @@
+#profile-image img {
+  border: 1px solid black;
+  border-radius: 50%;
+  width: 100px;
+  display: block;
+  margin: 0 auto;
+}
+.ui.card,
+.ui.cards > .card {
+  max-width: 100%;
+
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+  background: #fff;
+}
+.ui.card:last-child {
+  margin-bottom: unset;
+}
+
+.ui.card:first-child {
+  margin-top: unset;
+}
