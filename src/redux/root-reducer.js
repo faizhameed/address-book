@@ -58,9 +58,27 @@ function personDetailReducer(state = initialPersonDetail, action) {
   return state;
 }
 
+const initialStyle = {
+  mode: "light",
+};
+
+function styleReducer(state = initialStyle, action) {
+  switch (action.type) {
+    case actionTypes.TOGGLE_DARK_MODE:
+      return state.mode === "light"
+        ? { ...state, mode: "dark" }
+        : { ...state, mode: "light" };
+
+    default:
+      break;
+  }
+  return state;
+}
+
 const rootReducer = combineReducers({
   contactListReducer,
   personDetailReducer,
+  styleReducer,
 });
 
 export default rootReducer;

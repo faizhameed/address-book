@@ -1,4 +1,4 @@
-import React, { useRef, useCallback } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import Spinner from "../spinner/spinner.component";
@@ -12,9 +12,12 @@ const ContactTable = ({
   page,
   updatePageNumber,
   updatePersonDetailView,
+  mode,
 }) => {
   let history = useHistory();
-
+  const [shadow, setShadow] = useState(
+    "0px 0px 9px 0px rgba(255, 255, 255, 0.1)"
+  );
   const handleDetailView = (person) => {
     updatePersonDetailView(person);
     history.push("contact-detail");
@@ -39,6 +42,15 @@ const ContactTable = ({
     [isPending, page, updatePageNumber]
   );
 
+  const boxShadow = {
+    boxShadow: shadow,
+  };
+  useEffect(() => {
+    if (mode === "dark") setShadow("0px 0px 9px 0px rgba(255, 255, 255, 0.1)");
+    else {
+      setShadow("0px 0px 9px 0px rgba(0, 0, 0, 0.1)");
+    }
+  }, [mode]);
   return (
     <div className="container-table">
       {contactList.length > 0 ? (
@@ -76,7 +88,7 @@ const ContactTable = ({
               );
             } else {
               return (
-                <li className="table-row" key={index}>
+                <li className="table-row" style={boxShadow} key={index}>
                   <div
                     onClick={() => handleDetailView(person)}
                     data-label="Name"
@@ -108,10 +120,12 @@ const ContactTable = ({
 };
 const mapStateToProps = ({
   contactListReducer: { isPending, contactList, page },
+  styleReducer: { mode },
 }) => ({
   isPending,
   contactList,
   page,
+  mode,
 });
 
 const mapDispatchToProps = (dispatch) => ({
