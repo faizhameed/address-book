@@ -4,11 +4,18 @@ import { fetchContactList } from "../../redux/actions";
 import Spinner from "../../components/spinner/spinner.component";
 import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
-
+/**
+ * code spliting contactTable so that spinner is enabled to improve loading and UX
+ */
 const ContactTable = lazy(() => import("../../components/table/contactTable"));
 
 const AddressBook = ({ fetchContactList, pageNumber }) => {
   useEffect(() => {
+    /**
+     * fetch data with page number
+     * whenever page number is updated fetch is run automatically
+     * we run useEffect for every pagenumber updation
+     */
     fetchContactList(pageNumber);
   }, [fetchContactList, pageNumber]);
   return (

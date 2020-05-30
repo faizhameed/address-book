@@ -69,6 +69,9 @@ const initialStyle = {
 
 function styleReducer(state = initialStyle, action) {
   switch (action.type) {
+    /**
+     * When its dark toggle to light and vice versa
+     */
     case actionTypes.TOGGLE_DARK_MODE:
       return state.mode === "light"
         ? { ...state, mode: "dark" }
