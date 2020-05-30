@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Profile Card Component  should render profileCard component 1`] = `ShallowWrapper {}`;

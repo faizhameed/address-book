@@ -9,7 +9,7 @@ import Header from "../../components/Header/Header";
 const ContactDetails = ({ person }) => {
   return (
     <React.Fragment>
-      <Header content={`Contact Details`} />
+      <Header content={`Profile`} />
       <div className="main">
         {person ? (
           <div className="container">
