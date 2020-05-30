@@ -13,6 +13,7 @@ const ContactTable = ({
   updatePageNumber,
   updatePersonDetailView,
   mode,
+  searchField,
 }) => {
   let history = useHistory();
   const [shadow, setShadow] = useState(
@@ -42,6 +43,11 @@ const ContactTable = ({
     [isPending, page, updatePageNumber]
   );
 
+  const filteredUsers = contactList.filter((person) => {
+    let searchIncludes = person.name.first + person.name.last + person.gender;
+    return searchIncludes.toLowerCase().includes(searchField.toLowerCase());
+  });
+
   const boxShadow = {
     boxShadow: shadow,
   };
@@ -62,8 +68,8 @@ const ContactTable = ({
             <div className="col col-4">Contact</div>
           </li>
 
-          {contactList.map((person, index) => {
-            if (contactList.length === index + 1) {
+          {filteredUsers.map((person, index) => {
+            if (contactList.length === index + 1 && !searchField) {
               return (
                 <li className="table-row" ref={lastElementRef} key={index}>
                   <div
@@ -119,13 +125,14 @@ const ContactTable = ({
   );
 };
 const mapStateToProps = ({
-  contactListReducer: { isPending, contactList, page },
+  contactListReducer: { isPending, contactList, page, searchField },
   styleReducer: { mode },
 }) => ({
   isPending,
   contactList,
   page,
   mode,
+  searchField,
 });
 
 const mapDispatchToProps = (dispatch) => ({

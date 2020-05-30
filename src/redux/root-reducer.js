@@ -6,6 +6,7 @@ const initialContactList = {
   error: null,
   isPending: false,
   page: 1,
+  searchField: "",
 };
 function contactListReducer(state = initialContactList, action) {
   switch (action.type) {
@@ -27,7 +28,11 @@ function contactListReducer(state = initialContactList, action) {
         isPending: false,
         error: action.payload,
       };
-
+    case actionTypes.SEARCH_FIELD_CHANGE:
+      return {
+        ...state,
+        searchField: action.payload,
+      };
     case actionTypes.UPDATE_PAGE_NUMBER:
       if (action.payload < 11) {
         return {

@@ -29,6 +29,11 @@ export const updatePageNumber = (page) => ({
   payload: page,
 });
 
+export const searchFieldChange = (data) => ({
+  type: actionTypes.SEARCH_FIELD_CHANGE,
+  payload: data,
+});
+
 export const updatePersonDetailView = (person) => ({
   type: actionTypes.UPDATE_PERSON_DETAIL,
   payload: person,
