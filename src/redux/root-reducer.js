@@ -8,7 +8,7 @@ const initialContactList = {
   page: 1,
   searchField: "",
 };
-function contactListReducer(state = initialContactList, action) {
+export function contactListReducer(state = initialContactList, action) {
   switch (action.type) {
     case actionTypes.GET_CONTACTS_SUCCESS:
       return {

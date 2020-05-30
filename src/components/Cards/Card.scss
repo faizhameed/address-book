@@ -16,6 +16,9 @@
 .ui.card > .content > .header:not(.ui),
 .content .header {
   margin: 55px 0 0;
+  h2 {
+    font-size: 1.8em;
+  }
 }
 
 .ui.card,
@@ -37,4 +40,7 @@
 .ui.card > .extra a:not(.ui),
 .ui.card > .extra {
   color: rgba(164, 44, 44, 0.82);
+}
+.grid-view h5 {
+  font-size: 20px;
 }

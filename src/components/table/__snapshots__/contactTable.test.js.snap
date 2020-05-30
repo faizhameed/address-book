@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Contact Table Component  should render Contact Table component 1`] = `ShallowWrapper {}`;
