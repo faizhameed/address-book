@@ -6,6 +6,11 @@ import { searchFieldChange } from "../../redux/actions";
 
 const SearchBar = ({ searchFieldChange }) => {
   const [searchTerm, setSearchTerm] = useState("");
+
+  /**
+   * debouncing to reduce requests when user types fase
+   */
+
   const debouncedSearchTerm = _.debounce(setSearchTerm, 200);
 
   useEffect(() => {

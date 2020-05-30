@@ -1,6 +1,8 @@
 import { actionTypes } from "./types";
 import Axios from "axios";
-
+/**
+ * Does asynchronous with help of redux thunk middleware.
+ */
 export const fetchContactList = (page = 1) => {
   let url = `https://randomuser.me/api/?${page}&results=50`;
 

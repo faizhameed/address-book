@@ -25,24 +25,36 @@ const ContactTable = ({
   };
 
   const observer = useRef();
+  /**
+   * lastElement is referenced here to fetch the data again in infinte scroll function
+   */
   const lastElementRef = useCallback(
     (node) => {
       if (isPending) return;
+      /**
+       * here is we bascically disconnects from our previous node when lastelementref is changed
+       */
       if (observer.current) observer.current.disconnect();
+      /**
+       * now we are referencing new intersecting node so that we set for next data by updating page number
+       */
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           updatePageNumber(page + 1);
-          console.log(entries[0]);
         }
       });
       if (node) {
-        console.log(node);
+        /**
+         * if there is a node we need to observe it when we scroll upto it we can fetch the data again
+         */
         observer.current.observe(node);
       }
     },
     [isPending, page, updatePageNumber]
   );
-
+  /**
+   * Filter users based on search field data which includes first, last and gender
+   */
   const filteredUsers = contactList.filter((person) => {
     let searchIncludes = person.name.first + person.name.last + person.gender;
     return searchIncludes.toLowerCase().includes(searchField.toLowerCase());

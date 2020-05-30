@@ -5,7 +5,6 @@ import { toggleDarkMode } from "../../redux/actions";
 
 const ToggleButton = ({ toggleColorMode }) => {
   const checkFun = () => {
-    console.log("toggle button working");
     toggleColorMode();
   };
   return (

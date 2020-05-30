@@ -20,6 +20,9 @@ const ContactDetails = ({ person }) => {
             <p>Sorry No ContactList selected</p>
           </div>
         )}
+        {/**
+         * Go back to address table
+         */}
         <Link style={{ color: "#fff" }} to="/">
           <Button primary>Go Back</Button>
         </Link>

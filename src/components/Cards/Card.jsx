@@ -10,6 +10,9 @@ const ProfileCard = ({ person }) => (
 
     <Card.Content>
       <Card.Header>{person.name.first + " " + person.name.last}</Card.Header>
+      {/**
+       * Fixing date params to readable format using moment.js
+       */}
       <Card.Meta>{`Joined in ${moment(person.registered.date).format(
         "MMM Do YYYY"
       )}`}</Card.Meta>
