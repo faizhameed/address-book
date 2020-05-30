@@ -5,10 +5,18 @@ import ProfileCard from "../../components/Cards/Card";
 import "./ContactDetails.scss";
 import { Button } from "semantic-ui-react";
 import Header from "../../components/Header/Header";
+import { Helmet } from "react-helmet";
 
 const ContactDetails = ({ person }) => {
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Address Book| Idea</title>
+        <meta
+          name="description"
+          content="Address Book-fetch users from Api, search users and see user profile"
+        />
+      </Helmet>
       <Header content={`Profile`} />
       <div className="main">
         {person ? (

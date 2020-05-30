@@ -4,6 +4,7 @@ import { fetchContactList } from "../../redux/actions";
 import Spinner from "../../components/spinner/spinner.component";
 import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { Helmet } from "react-helmet";
 /**
  * code spliting contactTable so that spinner is enabled to improve loading and UX
  */
@@ -20,6 +21,13 @@ const AddressBook = ({ fetchContactList, pageNumber }) => {
   }, [fetchContactList, pageNumber]);
   return (
     <React.Fragment>
+      <Helmet>
+        <title>Address Book| Idea</title>
+        <meta
+          name="description"
+          content="Address Book-fetch users from Api, search users and see user profile"
+        />
+      </Helmet>
       <Header content={`Address Book`} />
       <div className="main">
         <Suspense fallback={<Spinner />}>
