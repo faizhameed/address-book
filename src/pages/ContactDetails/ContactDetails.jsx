@@ -32,7 +32,9 @@ const ContactDetails = ({ person }) => {
          * Go back to address table
          */}
         <Link style={{ color: "#fff" }} to="/">
-          <Button primary>Go Back</Button>
+          <Button style={{ margin: "10px 0 20px" }} primary>
+            Go Back
+          </Button>
         </Link>
       </div>
     </React.Fragment>
