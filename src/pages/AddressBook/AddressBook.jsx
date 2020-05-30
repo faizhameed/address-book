@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchContactList } from "../../redux/actions";
 import Spinner from "../../components/spinner/spinner.component";
 import Header from "../../components/Header/Header";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const ContactTable = lazy(() => import("../../components/table/contactTable"));
 
@@ -15,6 +16,8 @@ const AddressBook = ({ fetchContactList, pageNumber }) => {
       <Header content={`Address Book`} />
       <div className="main">
         <Suspense fallback={<Spinner />}>
+          <SearchBar />
+          <h4>New data will not be fetched if search field has values</h4>
           <h3>Click on name to view details</h3>
           <ContactTable />
         </Suspense>

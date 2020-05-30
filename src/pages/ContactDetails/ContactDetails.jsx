@@ -20,11 +20,9 @@ const ContactDetails = ({ person }) => {
             <p>Sorry No ContactList selected</p>
           </div>
         )}
-        <Button primary>
-          <Link style={{ color: "#fff" }} to="/">
-            Go Back
-          </Link>
-        </Button>
+        <Link style={{ color: "#fff" }} to="/">
+          <Button primary>Go Back</Button>
+        </Link>
       </div>
     </React.Fragment>
   );
