@@ -73,3 +73,23 @@ describe("contactListReducer", () => {
     });
   });
 });
+
+describe("search Robotes", () => {
+  const initialStyle = {
+    mode: "light",
+  };
+
+  it("should return initial state", () => {
+    expect(reducers.styleReducer(undefined, {})).toEqual(initialStyle);
+  });
+
+  it("should give alternate mode", () => {
+    expect(
+      reducers.styleReducer(initialStyle, {
+        type: actionTypes.TOGGLE_DARK_MODE,
+      })
+    ).toEqual({
+      mode: "dark",
+    });
+  });
+});
