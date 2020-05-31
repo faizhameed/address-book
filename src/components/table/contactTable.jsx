@@ -92,6 +92,7 @@ const ContactTable = ({
                     className="clickable col col-1"
                   >
                     {person.name.first + " " + person.name.last}
+                    <Icon name="eye" />
                   </div>
                   <div className="col col-2" data-label="Gender">
                     {person.gender}
