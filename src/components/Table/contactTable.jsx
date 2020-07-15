@@ -16,6 +16,9 @@ const ContactTable = ({
   searchField,
 }) => {
   let history = useHistory();
+  /*
+   * shadow to toggle between dark and light mode
+   */
   const [shadow, setShadow] = useState(
     "0px 0px 9px 0px rgba(255, 255, 255, 0.1)"
   );
