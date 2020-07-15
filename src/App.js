@@ -2,8 +2,8 @@ import React, { lazy, Suspense } from "react";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import "./App.css";
 import "semantic-ui-css/semantic.min.css";
-import ErrorBoundary from "./components/error-boundary/error-boundary.component";
-import Spinner from "./components/spinner/spinner.component";
+import ErrorBoundary from "./components/ErrorBoundary/error-boundary.component";
+import Spinner from "./components/Spinner/spinner.component";
 import { connect } from "react-redux";
 
 import { ThemeProvider } from "styled-components";

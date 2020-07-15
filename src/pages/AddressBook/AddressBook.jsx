@@ -1,14 +1,14 @@
 import React, { useEffect, lazy, Suspense } from "react";
 import { connect } from "react-redux";
 import { fetchContactList } from "../../redux/actions";
-import Spinner from "../../components/spinner/spinner.component";
+import Spinner from "../../components/Spinner/spinner.component";
 import Header from "../../components/Header/Header";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { Helmet } from "react-helmet";
 /**
  * code spliting contactTable so that spinner is enabled to improve loading and UX
  */
-const ContactTable = lazy(() => import("../../components/table/contactTable"));
+const ContactTable = lazy(() => import("../../components/Table/contactTable"));
 
 const AddressBook = ({ fetchContactList, pageNumber }) => {
   useEffect(() => {

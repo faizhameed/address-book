@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
-import Spinner from "../spinner/spinner.component";
+import Spinner from "../Spinner/spinner.component";
 import "./contactTable.scss";
 import { updatePageNumber, updatePersonDetailView } from "../../redux/actions";
 import { Icon } from "semantic-ui-react";
