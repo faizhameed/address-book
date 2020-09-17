@@ -30,6 +30,7 @@ const ContactTable = ({
   const observer = useRef();
   /**
    * lastElement is referenced here to fetch the data again in infinte scroll function
+   testing comment
    */
   const lastElementRef = useCallback(
     (node) => {
