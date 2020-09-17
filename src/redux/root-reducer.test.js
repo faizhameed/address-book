@@ -74,7 +74,7 @@ describe("contactListReducer", () => {
   });
 });
 
-describe("styleReducers", () => {
+describe("search Robotes", () => {
   const initialStyle = {
     mode: "light",
   };
